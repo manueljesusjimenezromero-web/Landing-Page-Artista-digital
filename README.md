@@ -21,7 +21,7 @@
  
 ---
  
-## 📋 Tabla de Recursos y Licencias
+##  Tabla de Recursos y Licencias
  
 | Archivo | URL de descarga original | Autor / Fuente | Tipo de licencia |
 |---|---|---|---|
@@ -35,7 +35,7 @@
  
 ---
  
-## 🛠️ Justificación Técnica de Formatos
+##  Justificación Técnica de Formatos
  
 ### Imágenes: `.webp` frente a `.jpg` / `.png`
  
@@ -46,9 +46,17 @@
 ### Audio: `.mp3` frente a `.wav`
  
 - Elegí `.mp3` porque su compresión con pérdida reduce el archivo a una décima parte del tamaño de un `.wav` sin comprimir, con una calidad suficiente para escucharlo en web.
+
+### Logo: `.svg` frente a `.png` / `.jpg`
+
+- Elegí `.svg` para el logo porque es un formato vectorial: se escala a cualquier tamaño sin perder nitidez ni calidad, y el archivo pesa muy poco al estar definido por código y no por píxeles.
+
+### Animación: `.gif` frente a vídeo / `.webp` animado
+
+- Elegí `.gif` para el botón de contacto porque se reproduce automáticamente en bucle dentro de una etiqueta `<img>`, sin necesidad de controles ni de JavaScript.
 ---
  
-## 🧰 Herramientas Utilizadas
+##  Herramientas Utilizadas
  
 | Herramienta | Proceso realizado | Tipo de archivo afectado |
 |---|---|---|
