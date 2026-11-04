@@ -8,9 +8,7 @@ Breve descripción del proyecto y su finalidad.
  
 | Archivo | URL de descarga original | Autor / Fuente | Tipo de licencia |
 |---|---|---|---|
-| ejemplo-imagen.webp | https://... | Nombre del autor o sitio | CC BY 4.0 |
-| ejemplo-audio.mp3 | https://... | Nombre del autor o sitio | Dominio Público |
-| ejemplo-video.mp4 | https://... | Nombre del autor o sitio | CC BY-SA 4.0 |
+| estrellado.webp | https://pixabay.com/es/photos/estrellas-cielo-noche-1837306/ | PixaBay | Dominio Publico |
 | ... | | | |
  
 > Completa una fila por cada archivo multimedia utilizado en el proyecto (imágenes, audio, vídeo, fuentes, iconos, etc.). Licencias habituales: **CC0 / Dominio Público**, **CC BY 4.0**, **CC BY-SA 4.0**, **CC BY-NC 4.0**, licencia de uso libre del banco de recursos, etc.
@@ -19,8 +17,7 @@ Breve descripción del proyecto y su finalidad.
  
 ## 🛠️ Justificación Técnica de Formatos
  
-Explica brevemente por qué elegiste cada formato final frente a otras alternativas.
- 
+
 ### Imágenes: `.webp` frente a `.jpg` / `.png`
 - [Escribe aquí tu justificación: p. ej. menor peso de archivo manteniendo calidad visual, soporte de transparencia, tiempos de carga web más rápidos, etc.]
 ### Vídeo: `.mp4` frente a `.avi` / `.mov`
@@ -35,7 +32,7 @@ Explica brevemente por qué elegiste cada formato final frente a otras alternati
  
 | Herramienta | Proceso realizado | Tipo de archivo afectado |
 |---|---|---|
-| GIMP | Redimensionado / recorte / exportación a .webp | Imágenes |
+| Pinta | Redimensionado / recorte / exportación a .webp | Imágenes |
 
  
 > Indica para cada herramienta qué tarea concreta hiciste con ella (redimensionar, recortar, convertir, comprimir, optimizar, etc.).
