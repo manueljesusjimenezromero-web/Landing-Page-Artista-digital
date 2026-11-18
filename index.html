@@ -5,11 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nébula</title>
 
-    <link rel="stylesheet" href="css.css">
+    <!-- Agregar los enlaces a los archivos CSS de Bootstrap y el archivo CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css.css">  
 </head>
 <body>
     <header>
-         <img src="assets/img/Logo.svg" class="logo" width="200" height="70" loading="lazy">
+        <a href="#inicio" class="logo">
+            <svg class="logo__svg" viewBox="0 0 120 120" role="img" focusable="false">
+                <title>Nébula - volver al inicio</title>
+                <defs>
+                <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop class="logo__stop-a" offset="0%"/>
+                    <stop class="logo__stop-b" offset="100%"/>
+                </linearGradient>
+                </defs>
+                <circle class="logo__aro"   cx="60" cy="60" r="54"/>
+                <circle class="logo__disco" cx="60" cy="60" r="46"/>
+                <text   class="logo__texto" x="60" y="78" text-anchor="middle">NB</text>
+            </svg>
+        </a>
     
         <nav>
             <a href="#">Inicio</a>
@@ -30,11 +45,16 @@
     <section  class="galeria">
     <h1 >Galería de conciertos</h1>
     <hr>
- 
+        
+    <img id="principal" class="principal"
+     src="assets/img/concert1.webp"
+     alt="Nebulosa de la Laguna">
     <div class="cards">
         <div class="card">
             <figure>
-                <img src="assets/img/concert1.webp" alt="Nebulosa de la Laguna, nube de gas rosada y azulada con estrellas brillantes" width="1200" height="750" loading="lazy">
+                <img class="mini" data-full="assets/img/concert1.webp"
+                    src="assets/img/concert1.webp" alt="Nebulosa de la Laguna, nube de gas rosada y azulada con estrellas brillantes"
+                    width="1200" height="750" loading="lazy">
                 <figcaption>
                     "Nebulosa de la Laguna" por Nebula, licencia
                   CC BY 4.0.
@@ -44,10 +64,12 @@
                 <h3>Nebulosa de la Laguna</h3>
             </div>
         </div>
- 
+
         <div class="card">
             <figure>
-                <img src="assets/img/concert2.webp" alt="Nebulosa de Orión, nube de gas luminosa en tonos azules y anaranjados" width="1200" height="750" loading="lazy">
+                <img class="mini" data-full="assets/img/concert2.webp"
+                    src="assets/img/concert2.webp" alt="Nebulosa de Orión, nube de gas luminosa en tonos azules y anaranjados"
+                    width="1200" height="750" loading="lazy">
                 <figcaption>
                     "Nebulosa de Orión" por Nebula, licencia
                     CC BY 4.0.
@@ -57,10 +79,12 @@
                 <h3>Nebulosa de Orión</h3>
             </div>
         </div>
- 
+
         <div class="card">
             <figure>
-                <img src="assets/img/concert3.webp" alt="Nebulosa roja, nube cósmica de tonos rojizos sobre un fondo estrellado" width="1200" height="750" loading="lazy">
+                <img class="mini" data-full="assets/img/concert3.webp"
+                    src="assets/img/concert3.webp"  alt="Nebulosa roja, nube cósmica de tonos rojizos sobre un fondo estrellado"
+                    width="1200" height="750" loading="lazy">
                 <figcaption>
                     "Nebulosa roja" por Nebula, licencia
                    CC BY 4.0.
@@ -72,27 +96,69 @@
         </div>
     </div>
 </section>
+
+<!-- Seccion del reel -->
     <section class="video" align="center">
-        <h1>Video Demostracion</h1>
-        <hr>
-        <figure>
-            <video controls poster="assets/img/poster.webp">
-                <source src="assets/video/video.mp4" type="video/mp4" >
-            </video>
-            <figcaption>
-                "Video demostración" por Nebula, licencia
-                CC BY 4.0.
-            </figcaption>
-        </figure>
-         <audio controls preload="none">
-                <source src="assets/audio/audio.mp3" type="audio/mpeg">
-                
-        </audio>
-    </section> 
-    </main>
+    <h1>Video Demostracion</h1>
+    <hr>
+        <!-- Boton para llamar al reel con su id y clase de bootstrap -->
+    <button type="button" id="btnReel" class="btn btn-outline-primary btn-lg">
+        Ver Reel de Animación
+    </button>
+    <!-- contenedor que contiene el video con su id y clase de bootstrap -->
+    <div class="modal fade" id="modalReel" tabindex="-1" aria-labelledby="tituloReel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <!-- contenedor que aparece en el modal con su id y clase de bootstrap con fondo oscuro y texto blanco -->
+            <div class="modal-content bg-dark text-white">
+                <!-- cabecera del modal -->
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="tituloReel">Reel de animación</h5>
+                    <button type="button" id="btnCerrarReel" class="btn-close btn-close-white" aria-label="Cerrar"></button>
+                </div>
+                <!-- Cuerpo del modal -->
+                <div class="modal-body">
+                    <video id="video" class="w-100" controls>
+                        <source src="assets/video/video.mp4" type="video/mp4">
+                    </video>
+                    <p class="mt-2 mb-0 text-secondary small">
+                        "Video demostración" por Nebula, licencia CC BY 4.0.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Seccion del audio ambiente (punto 4) -->
+<section class="ambiente">
+    <h2>Ambiente espacial</h2>
+    <hr>
+
+    <!-- Sin el atributo controls: los controles nativos quedan ocultos -->
+    <audio id="audioAmbiente" src="assets/audio/audio.mp3" preload="auto" loop></audio>
+
+    <!-- Botones propios que manejan el audio por JavaScript -->
+    <div class="ambiente-botones">
+        <button type="button" id="btnAmbiente" class="btn btn-outline-light btn-lg" aria-pressed="false">
+            Escuchar ambiente espacial
+        </button>
+    </div>
+</section>
  
     <footer id="contacto">
-        <p> 2026 Nebula</p>
+        <p> 2026 Nébula</p>
+
+        <!-- Licencia de la obra (punto 5) -->
+        <p class="licencia">
+            Esta obra se publica bajo licencia
+            <a>Creative Commons Atribución 4.0 Internacional (CC BY 4.0)</a>.
+        </p>
+
+        <!-- Enlace a las atribuciones de los recursos (punto 5) -->
+        <p><a href="credits.html">Créditos y licencias de los recursos</a></p>
     </footer>
+    <!-- Agregar los enlaces a los archivos JS de Bootstrap y el archivo JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

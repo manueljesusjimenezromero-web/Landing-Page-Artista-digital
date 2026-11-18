@@ -1,146 +1,515 @@
+
+
+/* 
+   1. MEDIDAS
+   Solo medidas, ningun color. Si cambio el radio o la duracion aqui,
+   se actualiza en toda la hoja.
+  */
+:root {
+    --radio: 16px;
+    --radio-chico: 12px;
+    --alto-cabecera: 126px;
+    --transicion: 0.25s ease;
+}
+
+/* 
+   2. BASE
+    */
 body {
     margin: 0;
-    padding-top: 110px;
+    padding-top: var(--alto-cabecera);
     background-color: #0d0d14;
-    color: white;
+    color: #ffffff;
 }
- 
+
+h1, h2, h3 {
+    line-height: 1.2;
+}
+
+hr {
+    width: 120px;
+    margin: 16px auto 0;
+    border: none;
+    border-top: 2px solid #4f7cff;
+    opacity: 1;
+}
+
 figure {
     margin: 0;
 }
- 
+
 figcaption {
-    color: #bbb;
+    color: #bbbbbb;
     font-size: 0.8rem;
     padding: 8px 16px 0;
 }
- 
+
 figcaption a {
-    color: #9ad;
+    color: #22d3ee;
 }
+
+/* Anillo de foco visible en toda la web: se ve al navegar con el tabulador */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid #22d3ee;
+    outline-offset: 3px;
+}
+
+/*
+   3. CABECERA
+   Tres columnas: logo | menu | boton. El 1fr de los extremos reparte
+   el espacio sobrante y deja el menu centrado.
+   */
 header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-    background-color: #0d0d14;
-    padding: 20px 24px;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
+    padding: 20px 24px;
+    background-color: #0d0d14;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
- 
-.logo {
-    height: 70px;
-    width: auto;
-}
- 
+
 nav {
     display: flex;
     gap: 24px;
 }
- 
+
 nav a {
-    color: white;
+    position: relative;
+    color: #ffffff;
     text-decoration: none;
     font-weight: 500;
+    padding: 6px 2px;
+    transition: color var(--transicion);
 }
- 
+
+nav a:hover {
+    color: #22d3ee;
+}
+
+/* Subrayado que crece de izquierda a derecha al pasar el raton */
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #22d3ee;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transicion);
+}
+
+nav a:hover::after {
+    transform: scaleX(1);
+}
+
+/*
+   4. LOGO SVG INLINE 
+    */
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    padding: 8px;
+    border-radius: var(--radio-chico);
+    text-decoration: none;
+}
+
+.logo__svg {
+    width: 70px;
+    height: 70px;
+}
+
+/* fill pinta el relleno, stroke el borde, stop-color los topes del degradado */
+.logo__aro {
+    fill: none;
+    stroke: #4f7cff;
+    stroke-width: 6;
+    transition: stroke 0.3s ease;
+}
+
+.logo__disco {
+    fill: #100c29;
+    transition: fill 0.3s ease;
+}
+
+.logo__texto {
+    fill: url(#logoGrad);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 46px;
+}
+
+.logo__stop-a {
+    stop-color: #7c3aed;
+}
+
+.logo__stop-b {
+    stop-color: #22d3ee;
+}
+
+/* Estado hover / foco: azul y violeta pasan a cian y turquesa */
+.logo:hover .logo__aro,
+.logo:focus-visible .logo__aro {
+    stroke: #22d3ee;
+}
+
+.logo:hover .logo__disco,
+.logo:focus-visible .logo__disco {
+    fill: #1b1640;
+}
+
+.logo:hover .logo__stop-a,
+.logo:focus-visible .logo__stop-a {
+    stop-color: #2fe8d8;
+}
+
+.logo:hover .logo__stop-b,
+.logo:focus-visible .logo__stop-b {
+    stop-color: #8b7bff;
+}
+
+/* 
+   5. BOTON DE CONTACTO (gif)
+   */
 .btn-contacto {
     justify-self: end;
-    transition: transform 0.2s ease, filter 0.2s ease;
+    transition: transform var(--transicion), filter var(--transicion);
 }
- 
+
 .btn-contacto img {
     height: 60px;
     width: auto;
     display: block;
 }
- 
+
 .btn-contacto:hover {
     transform: translateY(-2px) scale(1.04);
     filter: brightness(1.25);
 }
- 
-/* Hero */
+
+/* 
+   6. HERO
+   Dos capas en background-image: el degradado va encima de la foto
+   para que el texto se lea sobre las zonas claras.
+   */
 .hero {
-    background-image: url("assets/img/estrellado.webp");
+    display: flex;
+    align-items: center;
+    min-height: 60vh;
+    padding: 60px 40px;
+    background-image: linear-gradient(90deg, rgba(13, 13, 20, 0.85) 0%, rgba(13, 13, 20, 0.25) 70%),
+                      url("assets/img/estrellado.webp");
     background-size: cover;
     background-position: center;
-    padding: 40px;
 }
- 
+
 .hero-text {
     max-width: 700px;
 }
- 
+
 .hero-text h1 {
     font-size: 3rem;
     font-style: italic;
-    margin-bottom: 16px;
+    margin: 0 0 16px;
 }
- 
+
 .hero-text p {
     font-size: 1.1rem;
     line-height: 1.6;
+    margin: 0;
+    color: #bbbbbb;
 }
- 
-/* Galería */
+
+/*
+   7. GALERIA  (punto 2 de la practica)
+   */
+.galeria {
+    padding: 70px 16px;
+}
+
 .galeria h1 {
     text-align: center;
+    font-size: 2rem;
+    font-style: italic;
+    margin: 0;
 }
- 
+
+/* Imagen grande. La transicion de opacidad es la que suaviza el
+   cambio; el JS solo pone opacity a 0 y a 1. */
+.principal {
+    display: block;
+    width: 100%;
+    max-width: 1100px;
+    margin: 40px auto 0;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radio);
+    transition: opacity 0.3s ease;
+}
+
 .cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     max-width: 1100px;
-    margin: 30px auto 0;
+    margin: 24px auto 0;
 }
- 
+
+/* .card tambien es una clase de Bootstrap: anulamos el display: flex,
+   el borde y el color de texto que nos impone. */
 .card {
+    display: block;
     background-color: #15131f;
-    border-radius: 16px;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radio);
     overflow: hidden;
+    transition: border-color var(--transicion), transform var(--transicion);
 }
- 
+
+.card:hover {
+    border-color: #4f7cff;
+    transform: translateY(-4px);
+}
+
 .card img {
     width: 100%;
-    height: auto; 
+    height: auto;
     aspect-ratio: 16 / 10;
     object-fit: cover;
     display: block;
 }
- 
+
+/* Miniaturas: el cursor y la escala avisan de que se puede pulsar */
+.mini {
+    cursor: pointer;
+    transition: transform var(--transicion), filter var(--transicion);
+}
+
+.mini:hover {
+    transform: scale(1.05);
+    filter: brightness(1.15);
+}
+
 .card-info {
     padding: 16px;
 }
- 
+
 .card-info h3 {
     margin: 0;
     font-size: 1.1rem;
 }
- 
-/* Vídeo */
+
+/* 
+   8. SECCION DEL REEL Y MODAL  (punto 3 de la practica)
+   El aspecto del boton y de la ventana lo da Bootstrap; aqui solo
+   ajustamos espacios y el redondeo del video.
+    */
 .video {
+    padding: 70px 16px;
     text-align: center;
 }
- 
+
 .video h1 {
     font-size: 2rem;
-    margin-bottom: 20px;
     font-style: italic;
+    margin: 0;
 }
- 
-.video video {
-    width: 100%;
-    max-width: 900px;
+
+.video .btn-lg {
+    margin-top: 40px;
+}
+
+.modal-body video {
     height: auto;
+    border-radius: var(--radio-chico);
 }
- 
-/* Pie */
+
+/*
+   9. PIE
+    */
 footer {
     text-align: center;
-    padding: 24px;
+    padding: 40px 24px;
+    color: #bbbbbb;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+footer a {
+    color: #22d3ee;
+}
+
+/*
+   10. CREDITOS Y LICENCIA  (punto 5 de la practica)
+   Footer de la portada y pagina credits.html.
+    */
+.licencia {
+    font-size: 0.85rem;
+    max-width: 600px;
+    margin: 8px auto;
+}
+
+.creditos {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 16px 70px;
+}
+
+.creditos h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-style: italic;
+    margin: 0;
+}
+
+.creditos h2 {
+    font-size: 1.3rem;
+    margin: 40px 0 16px;
+    color: #22d3ee;
+}
+
+.creditos-intro {
+    text-align: center;
+    color: #bbbbbb;
+    margin: 24px 0 0;
+}
+
+.creditos a {
+    color: #22d3ee;
+}
+
+/*
+   11. AUDIO AMBIENTE  (punto 4 de la practica)
+   Los controles nativos no existen porque el <audio> no lleva controls.
+   El estado lo refleja el atributo aria-pressed, y lo seleccionamos
+   desde CSS con un selector de atributo.
+    */
+.ambiente {
+    padding: 0 16px 70px;
+    text-align: center;
+}
+
+.ambiente h2 {
+    font-size: 2rem;
+    font-style: italic;
+    margin: 0;
+}
+
+.ambiente-botones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 32px;
+}
+
+.ambiente-botones .btn {
+    min-height: 44px;
+}
+
+/* Cuando el boton esta "pulsado" (sonando) se enciende en cian */
+#btnAmbiente[aria-pressed="true"] {
+    border-color: #22d3ee;
+    color: #22d3ee;
+}
+
+/*
+   12. RESPONSIVE  
+  
+    */
+
+/*  Tablet: la galeria pasa de tres columnas a dos */
+@media (max-width: 900px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-text h1 {
+        font-size: 2.4rem;
+    }
+}
+
+/* Movil: cabecera apilada y una sola columna */
+@media (max-width: 600px) {
+    /* La cabecera se apila y crece, asi que redefinimos su alto */
+    :root {
+        --alto-cabecera: 210px;
+    }
+
+    header {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+    }
+
+    .btn-contacto {
+        justify-self: center;
+    }
+
+    /* Separacion suficiente para que los enlaces del menu no se toquen
+       con el dedo: 44px de alto minimo cada uno */
+    nav {
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav a {
+        display: flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 12px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding: 40px 20px;
+        min-height: auto;
+    }
+
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+
+    .galeria,
+    .video,
+    .ambiente {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    /* Los dos botones del audio, uno debajo del otro y a lo ancho */
+    .ambiente-botones {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .creditos h2 {
+        font-size: 1.1rem;
+    }
+}
+
+/* El logo es un enlace tactil: nunca por debajo de 44x44 */
+.logo {
+    min-width: 44px;
+}
+
+/* Respeta a quien pide menos animacion en su sistema operativo */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
 }
